@@ -1,230 +1,198 @@
 package com.example.dszcrturest.Model;
 
-class Student {
-    private String course;
-    private String specification;
-    private String group;
+import java.util.List;
+import java.util.Map;
 
-    public Student(String course, String specification, String group) {
-        this.course = course;
-        this.specification = specification;
-        this.group = group;
+class Schedule {
+    Map<String, List<Day>> schedule;
+
+    public Schedule(Map<String, List<Day>> schedule) {
+        this.schedule = schedule;
     }
 
-    public String getCourse() {
-        return course;
+    public Map<String, List<Day>> getSchedule() {
+        return schedule;
     }
 
-    public void setCourse(String course) {
-        this.course = course;
+    public void setSchedule(Map<String, List<Day>> schedule) {
+        this.schedule = schedule;
     }
 
-    public String getSpecification() {
-        return specification;
+    class Day {
+       private Map<String, List<Lesson>> day;
+
+        public Day(Map<String, List<Lesson>> day) {
+            this.day = day;
+        }
+
+        public Map<String, List<Lesson>> getDay() {
+            return day;
+        }
+
+        public void setDay(Map<String, List<Lesson>> day) {
+            this.day = day;
+        }
     }
 
-    public void setSpecification(String specification) {
-        this.specification = specification;
-    }
+    class Lesson {
+        private String course;
+        private String subject;
+        private String instructor;
+        private String type;
+        private String location;
+        private String time;
 
-    public String getGroup() {
-        return group;
-    }
+        public Lesson(String course, String subject, String instructor, String type, String location, String time) {
+            this.course = course;
+            this.subject = subject;
+            this.instructor = instructor;
+            this.type = type;
+            this.location = location;
+            this.time = time;
+        }
 
-    public void setGroup(String group) {
-        this.group = group;
-    }
+        public String getCourse() {
+            return course;
+        }
 
-    @Override
-    public String toString() {
-        return "Student{" +
-                "course='" + course + '\'' +
-                ", specification='" + specification + '\'' +
-                ", group='" + group + '\'' +
-                '}';
-    }
-}
+        public void setCourse(String course) {
+            this.course = course;
+        }
 
-class Time {
-    private String time;
-    private String dayOfTheWeek;
-    private String group;
+        public String getSubject() {
+            return subject;
+        }
 
-    public Time(String time, String dayOfTheWeek, String group) {
-        this.time = time;
-        this.dayOfTheWeek = dayOfTheWeek;
-        this.group = group;
-    }
+        public void setSubject(String subject) {
+            this.subject = subject;
+        }
 
-    public String getTime() {
-        return time;
-    }
+        public String getInstructor() {
+            return instructor;
+        }
 
-    public void setTime(String time) {
-        this.time = time;
-    }
+        public void setInstructor(String instructor) {
+            this.instructor = instructor;
+        }
 
-    public String getDayOfTheWeek() {
-        return dayOfTheWeek;
-    }
+        public String getType() {
+            return type;
+        }
 
-    public void setDayOfTheWeek(String dayOfTheWeek) {
-        this.dayOfTheWeek = dayOfTheWeek;
-    }
+        public void setType(String type) {
+            this.type = type;
+        }
 
-    public String getGroup() {
-        return group;
-    }
+        public String getLocation() {
+            return location;
+        }
 
-    public void setGroup(String group) {
-        this.group = group;
-    }
+        public void setLocation(String location) {
+            this.location = location;
+        }
 
-    @Override
-    public String toString() {
-        return "Time{" +
-                "time='" + time + '\'' +
-                ", dayOfTheWeek='" + dayOfTheWeek + '\'' +
-                ", group='" + group + '\'' +
-                '}';
-    }
-}
+        public String getTime() {
+            return time;
+        }
 
-
-class Subject {
-    private String subject;
-    private String lecturer;
-    private String Classroom;
-    private String type;
-    private String connection;
-
-    public Subject(String subject, String lecturer, String classroom, String type, String connection) {
-        this.subject = subject;
-        this.lecturer = lecturer;
-        Classroom = classroom;
-        this.type = type;
-        this.connection = connection;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
-    public String getLecturer() {
-        return lecturer;
-    }
-
-    public void setLecturer(String lecturer) {
-        this.lecturer = lecturer;
-    }
-
-    public String getClassroom() {
-        return Classroom;
-    }
-
-    public void setClassroom(String classroom) {
-        Classroom = classroom;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getConnection() {
-        return connection;
-    }
-
-    public void setConnection(String connection) {
-        this.connection = connection;
-    }
-
-    @Override
-    public String toString() {
-        return "Subject{" +
-                "subject='" + subject + '\'' +
-                ", lecturer='" + lecturer + '\'' +
-                ", Classroom='" + Classroom + '\'' +
-                ", type='" + type + '\'' +
-                ", connection='" + connection + '\'' +
-                '}';
+        public void setTime(String time) {
+            this.time = time;
+        }
     }
 }
-public class Content {
-    Student student;
-    Time time;
-    Subject subject;
-
-    public Content(Student student, Time time, Subject subject) {
-        this.student = student;
-        this.time = time;
-        this.subject = subject;
-    }
-
-    public Student getStudent() {
-        return student;
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
-    }
-
-    public Time getTime() {
-        return time;
-    }
-
-    public void setTime(Time time) {
-        this.time = time;
-    }
-
-    public Subject getSubject() {
-        return subject;
-    }
-
-    public void setSubject(Subject subject) {
-        this.subject = subject;
-    }
-
-    @Override
-    public String toString() {
-        return "Content{" +
-                "student=" + student +
-                ", time=" + time +
-                ", subject=" + subject +
-                '}';
-    }
-}
-
 /*
+        { -> Monday
+            { -> First
+                {
+                    IT,
+                    Diskrētās struktūras datorzinātnēs,
+                    R. Smirnova,
+                    Lekcija,
+                    408,
+                    8:00 - 10:00
+                }
+            },
+            { -> Second
+                {
+                    IT,
+                    Datorgrafikas un attēlu apstr. pam.,
+                    A. Sisojevs,
+                    Lekcija,
+                    Zoom,
+                    10:00 - 12:00
+                },
+                {
+                    IT,
+                    Sistēmu model. un imitācijas pamati,
+                    R. Smirnova ,
+                    Lekcija,
+                    408,
+                    10:00 - 12:00
+                },
+                {
+                    Automobiļu transports,
+                    Materiālu pret.[1/2],
+                    O.Kononova ,
+                    Lekcija,
+                    Zoom,
+                    10:00 - 12:00
+                }
+            },
+            { -> Third 12:00 - 14:00
 
-    Model:
-        Student
-            {
-                Course(1. or 2.)
-                Specialisation(Computer Systems, Information Technologies, Automation, Builders etc..)
-                Group(1. or 2.)
-            }
-        Time
-            {
-                Time
-                Day of the week
-                Position(1, 2, 3, etc..)
-                Week(odd or even)
-            }
-        Subject
-            {
-                Subject(Math, Physics, OS etc..)
-                Lecturer(Maria Dobkevicha)
-                Classroom(12)
-                Type(Lesson, Laboratory work or Test)
-                Connection(Remote or not)
-            }
+            },
+            { -> Fourth 14:00 - 16:00
 
+            },
+            { -> Fifth 16:00 - 18:00
+
+            }
+        },
+        { -> Tuesday
+            { -> First
+                {
+                    IT,
+                    Diskrētās struktūras datorzinātnēs,
+                    R. Smirnova,
+                    Lekcija,
+                    408,
+                    8:00 - 10:00
+                }
+            },
+            { -> Second
+                {
+                    IT,
+                    Datorgrafikas un attēlu apstr. pam.,
+                    A. Sisojevs,
+                    Lekcija,
+                    Zoom,
+                    10:00 - 12:00
+                },
+                {
+                    IT,
+                    Sistēmu model. un imitācijas pamati,
+                    R. Smirnova ,
+                    Lekcija,
+                    408,
+                    10:00 - 12:00
+                },
+                {
+                    Automobiļu transports,
+                    Materiālu pret.[1/2],
+                    O.Kononova ,
+                    Lekcija,
+                    Zoom,
+                    10:00 - 12:00
+                }
+            },
+            { -> Third 12:00 - 14:00
+
+            },
+            { -> Fourth 14:00 - 16:00
+
+            },
+            { -> Fifth 16:00 - 18:00
+
+            }
+        }
  */

@@ -7,12 +7,17 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
 @Component
 public class ExcelFileReaderService {
+    private ArrayList<String[]> rawData = new ArrayList<>();
+    private ArrayList<String[]> data = new ArrayList<>();
+    private String[] specialisations = {"Datorsistēmas, Informācijas tehnoloģija, Automātika un datortehnika",  "Viedā elektroenerģētika", "Automobiļu transports",  "Inženiertehnika, mehānika un mašīnbūve", "Mehatronika", "Būvniecība", };
     public List<String[]> readExcelFile(String filePath) throws IOException {
+
         File file = new File(filePath);
         FileInputStream fis = new FileInputStream(file);
 
@@ -32,11 +37,17 @@ public class ExcelFileReaderService {
         Sheet sheet = workbook.getSheetAt(0);
 
         // Iterate over the rows in the sheet and add the data to a list.
-        List<String[]> data = new ArrayList<>();
-
+        //List<String[]> data = new ArrayList<>();
+        int startRow = 4;
         Iterator<Row> rowiterator = sheet.iterator();
         while (rowiterator.hasNext()) {
             Row row = rowiterator.next();
+
+            // Skip rows until we reach the start row.
+            if (row.getRowNum() < startRow) {
+                continue;
+            }
+
             Iterator<Cell> cellIterator = row.iterator();
 
             String[] rowData = new String[row.getLastCellNum()];
@@ -51,14 +62,25 @@ public class ExcelFileReaderService {
                 } else {
                     rowData[i] = cell.getStringCellValue();
                 }
-
+                if (rowData[i] == "") {
+                    rowData[i] = "FREE";
+                }
                 i++;
             }
-            data.add(rowData);
+            this.rawData.add(rowData);
         }
 
         workbook.close();
 
-        return data;
+        return rawData;
+    }
+
+
+    private void createContent() {
+        ArrayList<String[]> copyOfRawData = new ArrayList<>(rawData);
+        for (String[] e : copyOfRawData) {
+
+        }
+
     }
 }
