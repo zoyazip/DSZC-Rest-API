@@ -3,7 +3,7 @@ package com.example.dszcrturest.Model;
 import java.util.List;
 import java.util.Map;
 
-class Schedule {
+public class Schedule {
     Map<String, List<Day>> schedule;
 
     public Schedule(Map<String, List<Day>> schedule) {
@@ -14,11 +14,11 @@ class Schedule {
         return schedule;
     }
 
-    public void setSchedule(Map<String, List<Day>> schedule) {
+    public void setSchedule(String s, Map<String, List<Day>> schedule) {
         this.schedule = schedule;
     }
 
-    class Day {
+    public static class Day {
        private Map<String, List<Lesson>> day;
 
         public Day(Map<String, List<Lesson>> day) {
@@ -34,7 +34,7 @@ class Schedule {
         }
     }
 
-    class Lesson {
+    public static class Lesson {
         private String course;
         private String subject;
         private String instructor;
@@ -148,51 +148,5 @@ class Schedule {
 
             }
         },
-        { -> Tuesday
-            { -> First
-                {
-                    IT,
-                    Diskrētās struktūras datorzinātnēs,
-                    R. Smirnova,
-                    Lekcija,
-                    408,
-                    8:00 - 10:00
-                }
-            },
-            { -> Second
-                {
-                    IT,
-                    Datorgrafikas un attēlu apstr. pam.,
-                    A. Sisojevs,
-                    Lekcija,
-                    Zoom,
-                    10:00 - 12:00
-                },
-                {
-                    IT,
-                    Sistēmu model. un imitācijas pamati,
-                    R. Smirnova ,
-                    Lekcija,
-                    408,
-                    10:00 - 12:00
-                },
-                {
-                    Automobiļu transports,
-                    Materiālu pret.[1/2],
-                    O.Kononova ,
-                    Lekcija,
-                    Zoom,
-                    10:00 - 12:00
-                }
-            },
-            { -> Third 12:00 - 14:00
 
-            },
-            { -> Fourth 14:00 - 16:00
-
-            },
-            { -> Fifth 16:00 - 18:00
-
-            }
-        }
  */

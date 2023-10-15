@@ -1,5 +1,6 @@
 package com.example.dszcrturest.ExcelService;
 
+import com.example.dszcrturest.Model.Schedule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +17,7 @@ public class ExcelController {
     public List<String[]> getExcelData() throws IOException {
         List<String[]> data = excelFileReaderService.readExcelFile("/Users/denischernovs/Documents/GitHub/DSZC-Rest-API/src/main/java/com/example/dszcrturest/Schedule/DownloadedSchedule/dszc.dienas.xlsx");
 
-        printExcelData(data);
+        //printExcelData(data);
         return data;
     }
 
