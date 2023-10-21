@@ -23,7 +23,7 @@ This is my REST api pet project using Java Spring Boot framework.
   <li>Coding style</li>
   <li>Code optimisation</li>
   <li>Maybe more exception handlers</li>
-  <li>Learn some best practices for error handling etc..</li>
+  <li>Learn some best practices</li>
 </ul>
   
   
