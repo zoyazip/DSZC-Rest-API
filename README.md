@@ -2,7 +2,7 @@
 This is a RESTful web service, which downloads the latest Rigas Technican University Daugavpils Schedule in .xlsx format (Excel file),
 parse it and returns as a response Schedule in JSON format.
 
-<bold>There is 2 Endpoints for this service:</bold>
+<bold>There is 2 Endpoints for this service:</bold></br>
   /schedule -> returns the schedule of whole week
   /schedule/{day} -> returns the schedule for specific day of the week. For example, /schedule/monday will return schedule of monday etc..
 
