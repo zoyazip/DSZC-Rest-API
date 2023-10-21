@@ -10,10 +10,14 @@ import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+/*
+    ExcelController is a RestController of Spring, which controls Excel Reading process
+ */
+
 @RestController
 public class ExcelController {
     @Autowired
-    private ExcelFileReaderService excelFileReaderService;
+    private ExcelFileService excelFileService;
 
     private LinkedHashMap<String, Day> data;
     @GetMapping("/schedule")
@@ -30,8 +34,8 @@ public class ExcelController {
     }
 
     private void createSchedule() throws IOException {
-        excelFileReaderService.readExcelFile();
-        data = excelFileReaderService.createContent();
+        excelFileService.readExcelFile();
+        data = excelFileService.createContent();
     }
     private static void printExcelData(List<String[]> data) {
         for (String[] rowData : data) {

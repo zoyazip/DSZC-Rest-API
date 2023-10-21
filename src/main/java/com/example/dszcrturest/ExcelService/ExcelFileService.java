@@ -5,15 +5,20 @@ import com.example.dszcrturest.Model.Lesson;
 import com.example.dszcrturest.Schedule.ScheduleController;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.*;
 
-@Component
-public class ExcelFileReaderService {
+/*
+    ExcelFileReaderService is a Spring Service which contains business logic for this application.
+    It's processing and manipulating updated excel file data, contains helping private methods
+ */
+
+@Service
+public class ExcelFileService {
     private ArrayList<String[]> data = new ArrayList<>();
     @Autowired
     private ScheduleController sc;

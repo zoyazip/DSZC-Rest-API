@@ -7,14 +7,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-
+/*
+    ScheduleController is a controller, which controlls Downloading files from provided link into specific folder
+ */
 @RestController
-@RequestMapping("/download")
 public class ScheduleController {
     @Autowired
     private ScheduleDownloader scheduleDownloader;
 
-    @GetMapping("/file")
     public void DownloadFile() throws MalformedURLException {
         String url = "https://dszc-daugavpils.rtu.lv/timetables/dszc.dienas.xlsx";
         String userHome = System.getProperty("user.dir") + "/src/main/java/com/example/dszcrturest/Schedule";

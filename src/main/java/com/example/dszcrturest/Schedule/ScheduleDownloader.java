@@ -8,7 +8,9 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.*;
 import java.net.URL;
-
+/*
+    ScheduleDownloader is a Spring Service that downloads excel file (Daugavpils Rigas Technical University Schedule) from web page
+ */
 @Service
 public class ScheduleDownloader {
 
