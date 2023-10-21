@@ -17,7 +17,7 @@ class DszcRtuRestApplicationTests {
 
     //Unit tests are off, because theese methods in ExcelFileService are private
     //While testing I have made them public
-    
+
     /*
     @Test
     void getLessonInstructorTest() {
