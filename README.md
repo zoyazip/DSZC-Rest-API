@@ -3,10 +3,11 @@ This is a RESTful web service, which downloads the latest Rigas Technican Univer
 parse it and returns as a response Schedule in JSON format.
 
 <bold>There is 2 Endpoints for this service:</bold></br>
-  /schedule -> returns the schedule of whole week
-  /schedule/{day} -> returns the schedule for specific day of the week. For example, /schedule/monday will return schedule of monday etc..
-
-
+<ul>
+  <li>/schedule -> returns the schedule of whole week</li>
+  <li>/schedule/{day} -> returns the schedule for specific day of the week. For example, /schedule/monday will return schedule of monday etc..</li>
+</ul>
+  
 This is my REST api pet project using Java Spring Boot framework.
 <bold>During this project I have learnt:</bold>
 <ul>
