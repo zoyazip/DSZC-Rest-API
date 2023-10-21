@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-
 @RestController
 @RequestMapping("/download")
 public class ScheduleController {
@@ -17,15 +16,15 @@ public class ScheduleController {
 
     @GetMapping("/file")
     public void DownloadFile() throws MalformedURLException {
-        String url =  "https://dszc-daugavpils.rtu.lv/timetables/dszc.dienas.xlsx";
-        String path = "C:\\Users\\chern\\Documents\\dszcRTURest\\src\\main\\java\\com\\example\\dszcrturest\\Schedule\\DownloadedSchedule\\Schedule.xslx";
+        String url = "https://dszc-daugavpils.rtu.lv/timetables/dszc.dienas.xlsx";
+        String userHome = System.getProperty("user.dir") + "/src/main/java/com/example/dszcrturest/Schedule";
+        String path = userHome + "/DownloadedSchedule/Schedule.xlsx";
 
         try {
             scheduleDownloader.downloadSchedule(url, path);
-            System.out.println("File has been downloaded");
-        }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("File has been downloaded to: " + path);
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
         }
     }
 }

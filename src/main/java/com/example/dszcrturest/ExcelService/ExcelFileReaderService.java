@@ -2,24 +2,24 @@ package com.example.dszcrturest.ExcelService;
 
 import com.example.dszcrturest.Model.Day;
 import com.example.dszcrturest.Model.Lesson;
+import com.example.dszcrturest.Schedule.ScheduleController;
 import org.apache.poi.ss.usermodel.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @Component
 public class ExcelFileReaderService {
-    private ArrayList<String[]> rawData = new ArrayList<>();
-    private ArrayList<Day> data = new ArrayList<>();
-    private String[] specialisations = {"Datorsistēmas, Informācijas tehnoloģija, Automātika un datortehnika", "Viedā elektroenerģētika", "Automobiļu transports", "Inženiertehnika, mehānika un mašīnbūve", "Mehatronika", "Būvniecība",};
-
-    public ArrayList<ArrayList<HashMap<String, Day>>> readExcelFile(String filePath) throws IOException {
-
+    private ArrayList<String[]> data = new ArrayList<>();
+    @Autowired
+    private ScheduleController sc;
+    private String filePath = System.getProperty("user.dir") + "/src/main/java/com/example/dszcrturest/Schedule/DownloadedSchedule/Schedule.xlsx";
+    public void readExcelFile() throws IOException {
+        this.sc.DownloadFile();
         File file = new File(filePath);
         FileInputStream fis = new FileInputStream(file);
 
@@ -67,21 +67,21 @@ public class ExcelFileReaderService {
                 }
                 i++;
             }
-            this.rawData.add(rowData);
+            this.data.add(rowData);
         }
 
         workbook.close();
-        ArrayList<ArrayList<HashMap<String, Day>>> week = createContent(rawData);
-        return week;
     }
-    private ArrayList<ArrayList<HashMap<String, Day>>> createContent(List<String[]> data) {
-        ArrayList<ArrayList<HashMap<String, Day>>> week = new ArrayList<>();
+    public LinkedHashMap<String, Day> createContent() {
 
         List<String> days = new ArrayList<>();
         String lessonName = "";
         String lessonTime = "";
         String lessonInstructor = "";
         String lessonRoom = "";
+        String lessonCourse = "";
+        String lessonDay = "";
+
         ArrayList<Lesson> mondaySchedule = new ArrayList<>();
         ArrayList<Lesson> tuesdaySchedule = new ArrayList<>();
         ArrayList<Lesson> wednesdaySchedule = new ArrayList<>();
@@ -99,12 +99,23 @@ public class ExcelFileReaderService {
                     lessonTime = data.get(i)[j];
 
                 }
+                if (j == 0 && !data.get(i)[j].equals("FREE")) {
+                    lessonDay = data.get(i)[j];
+                }
                 if ((data.get(i)[j] != "FREE" && data.get(i)[j] != null) && j > 2) {
-                    System.out.println(i + " - " + j + ") " + data.get(i)[j]);
+                    //System.out.println(i + " - " + j + ") " + data.get(i)[j]);
                     lessonName = data.get(i)[j];
                     lessonRoom = getClassRoom(lessonName);
                     lessonInstructor = getLessonInstructor(lessonName);
-                    Lesson lesson = new Lesson(lessonName, lessonTime, lessonInstructor, lessonRoom);
+
+                    if (j >= 10) {
+                        lessonCourse = "2";
+                    }
+                    else {
+                        lessonCourse = "1";
+                    }
+
+                    Lesson lesson = new Lesson(lessonName, lessonTime, lessonInstructor, lessonRoom, lessonCourse, lessonDay);
                     if (i < 6) {
                         mondaySchedule.add(lesson);
                     }
@@ -120,39 +131,22 @@ public class ExcelFileReaderService {
                     else if (i > 24 && i < 30) {
                         fridaySchedule.add(lesson);
                     }
-                    else if (i > 30) {
+                    else if (i > 30 && i < 36) {
                         saturdaySchedule.add(lesson);
                     }
                 }
-
             }
         }
 
-        HashMap<String, Day> monday = new HashMap<>();
-        HashMap<String, Day> tuesday = new HashMap<>();
-        HashMap<String, Day> wednesday = new HashMap<>();
-        HashMap<String, Day> thursday = new HashMap<>();
-        HashMap<String, Day> friday = new HashMap<>();
-        HashMap<String, Day> saturady = new HashMap<>();
+        LinkedHashMap<String, Day> schedule = new LinkedHashMap<>();
+        schedule.put("monday", new Day(mondaySchedule));
+        schedule.put("tuesday", new Day(tuesdaySchedule));
+        schedule.put("wednesday", new Day(wednesdaySchedule));
+        schedule.put("thursday", new Day(thursdaySchedule));
+        schedule.put("friday", new Day(fridaySchedule));
+        schedule.put("saturday", new Day(saturdaySchedule));
 
-        monday.put("Monday", new Day(mondaySchedule));
-        tuesday.put("Tuesday", new Day(tuesdaySchedule));
-        wednesday.put("Wednesday", new Day(wednesdaySchedule));
-        thursday.put("Thursday", new Day(thursdaySchedule));
-        friday.put("Friday", new Day(fridaySchedule));
-        saturady.put("Saturday", new Day(saturdaySchedule));
-
-        ArrayList<HashMap<String, Day>> schedule = new ArrayList<>();
-
-        schedule.add(monday);
-        schedule.add(tuesday);
-        schedule.add(wednesday);
-        schedule.add(thursday);
-        schedule.add(friday);
-        schedule.add(saturady);
-
-        week.add(schedule);
-        return week;
+        return schedule;
     }
 
     private String getClassRoom(String data) {
@@ -166,7 +160,6 @@ public class ExcelFileReaderService {
         }
     }
 
-
     private boolean canBeParsedToInt(String data) {
         try {
             Integer.parseInt(data);
@@ -177,7 +170,7 @@ public class ExcelFileReaderService {
     }
 
     private String getLessonInstructor(String data) {
-        String[] instructorNames = {"R. Smirnova", "lekt. A. Sisojevs", "prof. O.Kononova", "doc. I. Ščukins", "asoc.prof.S.Jaundalders", "lekt. S. Gorņiks", "doc. A. Paeglītis", "lekt. G. Spriņģis", "doc.L.Lavrinoviča", "lekt.Z.Lazda"};
+        String[] instructorNames = {"R. Smirnova", "lekt. A. Sisojevs", "prof. O.Kononova", "doc. I. Ščukins", "asoc.prof.S.Jaundalders", "lekt. S. Gorņiks", "doc. A. Paeglītis", "lekt. G. Spriņģis", "doc.L.Lavrinoviča", "lekt.Z.Lazda", "L.Zemīte", "J. Tretjakova", "M. Dobkeviča"};
         for (String name : instructorNames) {
             if (data.contains(name)){
                 return name;

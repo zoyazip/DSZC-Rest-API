@@ -5,12 +5,32 @@ public class Lesson {
     private String time;
     private String instructor;
     private String room;
+    private String course;
+    private String day;
 
-    public Lesson(String name, String time, String instructor, String room) {
+    public Lesson(String name, String time, String instructor, String room, String course, String day) {
         this.name = name;
         this.time = time;
         this.instructor = instructor;
         this.room = room;
+        this.course = course;
+        this.day = day;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public String getCourse() {
+        return course;
+    }
+
+    public void setCourse(String course) {
+        this.course = course;
     }
 
     public String getName() {
@@ -52,6 +72,8 @@ public class Lesson {
                 ", time='" + time + '\'' +
                 ", instructor='" + instructor + '\'' +
                 ", room='" + room + '\'' +
+                ", course='" + course + '\'' +
+                ", day='" + day + '\'' +
                 '}';
     }
 }

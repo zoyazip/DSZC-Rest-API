@@ -3,24 +3,24 @@ package com.example.dszcrturest.Model;
 import java.util.ArrayList;
 
 public class Day {
-    private ArrayList<Lesson> lesson;
+    private ArrayList<Lesson> lessons;
 
-    public Day(ArrayList<Lesson> lesson) {
-        this.lesson = lesson;
+    public Day(ArrayList<Lesson> lessons) {
+        this.lessons = lessons;
     }
 
     public ArrayList<Lesson> getLesson() {
-        return lesson;
+        return lessons;
     }
 
-    public void setLesson(ArrayList<Lesson> lesson) {
-        this.lesson = lesson;
+    public void setLesson(ArrayList<Lesson> lessons) {
+        this.lessons = lessons;
     }
 
     @Override
     public String toString() {
         return "Day{" +
-                "lesson=" + lesson +
+                "lesson=" + lessons +
                 '}';
     }
 }
