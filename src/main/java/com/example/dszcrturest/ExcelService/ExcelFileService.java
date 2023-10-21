@@ -155,9 +155,17 @@ public class ExcelFileService {
     }
 
     private String getClassRoom(String data) {
-        if (data.substring(data.length() - 4).equals("Zoom")) {
+        if (data.isEmpty()) {
+            return "Unknown";
+        }
+
+        if (data.contains("Zoom")) {
             return "Zoom";
-        } else if (!canBeParsedToInt(data.substring(data.length() - 3))) {
+        }
+        else if (data.contains("MS Teams")) {
+            return "MS Teams";
+        }
+        else if (!canBeParsedToInt(data.substring(data.length() - 3))) {
             return "Unknown";
         }
         else {
